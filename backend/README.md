@@ -223,6 +223,10 @@ period takes roughly 30 seconds.
 
 ## Known Limitations
 
+- No signup flow. New users cannot register themselves; accounts are provisioned through
+  the seed script.
+- The API may wake slowly. On Render's free tier the backend sleeps when unused, so the
+  first request after an idle period can take several seconds.
 - No refresh token rotation; a single access token with a 1 day lifetime.
 - No automated test suite. Endpoints were verified manually via the Postman collection.
 - Invoicing, payments, and purchase orders were out of scope for this exercise.

@@ -16,14 +16,21 @@ Built as a technical case study submission.
 | `ARCHITECTURE.md` | Design decisions and rationale |
 | `backend/README.md` | Full API reference and backend setup |
 
-## Live URLs
+## Deployment
 
-| | |
+The application is deployed across three free-tier services:
+
+| Component | Platform |
 |---|---|
-| Frontend | _not deployed — see local setup below_ |
-| Backend API | _not deployed — see local setup below_ |
+| Frontend | Vercel |
+| Backend API | Render |
+| Database | Neon (PostgreSQL) |
 
-Deployment steps for Render, Neon and Vercel are documented in `backend/README.md`.
+Live URLs are provided with the submission. Deployment configuration and build commands
+are documented in `backend/README.md`.
+
+The API runs on Render's free tier, which sleeps after a period of inactivity. The first
+request after an idle period may take several seconds while the service wakes.
 
 ## Test Credentials
 
@@ -142,8 +149,12 @@ The rules worth reviewing, with rationale in `ARCHITECTURE.md`:
 
 ## Known Limitations
 
-- Not deployed. Local setup is documented above; deployment steps are in
-  `backend/README.md`.
+- No signup flow. New users cannot register themselves; accounts are provisioned through
+  the seed script, which is the intended behaviour for an internal tool but means adding a
+  colleague currently requires a developer.
+- The API may wake slowly. On Render's free tier the backend sleeps when unused, so the
+  first request after an idle period can take several seconds before the service responds
+  normally.
 - No automated test suite. Endpoints are covered by assertions in the Postman collection,
   which is a weaker guarantee than unit and integration tests.
 - No refresh token rotation. A single one-day access token.

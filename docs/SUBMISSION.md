@@ -5,8 +5,8 @@ Mapped against the case study's stated requirements.
 | # | Required | Status | Where |
 |---|---|---|---|
 | 1 | GitHub repository link | done | this repo |
-| 2 | Live frontend URL | not deployed | local setup in `README.md` |
-| 3 | Live backend API URL | not deployed | local setup in `README.md` |
+| 2 | Live frontend URL | done | Deployed on Vercel; URL submitted with the form |
+| 3 | Live backend API URL | done | Deployed on Render; URL submitted with the form |
 | 4 | Test login credentials, all roles | done | `README.md` |
 | 5 | Postman collection / API docs | done | `postman/` and `backend/README.md` |
 | 6 | README with setup + deployment | done | `README.md`, `backend/README.md` |
