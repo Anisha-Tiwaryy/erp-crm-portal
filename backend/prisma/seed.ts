@@ -5,13 +5,13 @@ import dotenv from "dotenv";
 dotenv.config();
 const prisma = new PrismaClient();
 
-const PASSWORD = process.env.SEED_PASSWORD ?? "Password@123";
 
-const users: { name: string; email: string; role: Role }[] = [
-  { name: "Aditi Admin", email: "admin@erpdemo.com", role: "ADMIN" },
-  { name: "Sanjay Sales", email: "sales@erpdemo.com", role: "SALES" },
-  { name: "Wasim Warehouse", email: "warehouse@erpdemo.com", role: "WAREHOUSE" },
-  { name: "Anita Accounts", email: "accounts@erpdemo.com", role: "ACCOUNTS" },
+
+const users: { name: string; email: string; role: Role; password: string }[] = [
+  { name: "Aditi Admin", email: "admin@erpdemo.com", role: "ADMIN", password: "admin123" },
+  { name: "Sanjay Sales", email: "sales@erpdemo.com", role: "SALES", password: "sales123" },
+  { name: "Wasim Warehouse", email: "warehouse@erpdemo.com", role: "WAREHOUSE", password: "warehouse123" },
+  { name: "Anita Accounts", email: "accounts@erpdemo.com", role: "ACCOUNTS", password: "account123" },
 ];
 
 const products = [
@@ -32,14 +32,13 @@ const customers = [
 async function main() {
   console.log("Seeding database...");
 
-  const passwordHash = await bcrypt.hash(PASSWORD, 10);
-
   const createdUsers = [];
   for (const u of users) {
+    const passwordHash = await bcrypt.hash(u.password, 10);
     const user = await prisma.user.upsert({
       where: { email: u.email },
       update: { name: u.name, role: u.role, passwordHash },
-      create: { ...u, passwordHash },
+      create: { name: u.name, email: u.email, role: u.role, passwordHash },
     });
     createdUsers.push(user);
     console.log(`  user: ${user.email} (${user.role})`);
@@ -86,7 +85,7 @@ async function main() {
     }
   }
 
-  console.log(`\nDone. All demo accounts use the password: ${PASSWORD}`);
+  console.log(`\nDone. Demo accounts seeded with per-role passwords`);
 }
 
 main()
