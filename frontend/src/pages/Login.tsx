@@ -7,7 +7,7 @@ export default function Login() {
   const { login, user } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("admin@erpdemo.com");
-  const [password, setPassword] = useState("Password@123");
+  const [password, setPassword] = useState("admin123");
   const [error, setError] = useState<any>(null);
   const [busy, setBusy] = useState(false);
 
@@ -50,7 +50,7 @@ export default function Login() {
           {busy ? "Signing in..." : "Sign in"}
         </button>
         <div className="hint">
-          <strong>Demo accounts</strong> (password <code>Password@123</code>)<br />
+          <strong>Demo accounts</strong><br />
           <code>admin@erpdemo.com</code> — full access<br />
           <code>sales@erpdemo.com</code> — CRM and challans<br />
           <code>warehouse@erpdemo.com</code> — products and stock<br />
